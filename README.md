@@ -1,5 +1,5 @@
 # Löve2D Joystick Tester
-A simple LÖVE2D application to test joystick axes, buttons and hats.
+A simple LÖVE-2D application to test joystick axes, buttons and hats.
 Supports having multiple joysticks at once!
 
 ## Tips
