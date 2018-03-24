@@ -6,7 +6,7 @@ function love.conf(t)
 	
 	-- Disable some modules not needed (Probably there are more that I can disable but meh)
 	t.modules.audio = false
-    t.modules.physics = false
+	t.modules.physics = false
 	t.modules.sound = false
 	t.modules.touch = false
 end
