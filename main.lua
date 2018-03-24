@@ -2,7 +2,7 @@ local joysticks = {}
 local currentJoystick = 0
 
 function love.load()
-    for i, joystick in ipairs(love.joystick.getJoysticks()) do
+	for i, joystick in ipairs(love.joystick.getJoysticks()) do
 		newJoystick = {}
 		newJoystick.name = joystick:getName()
 		newJoystick.axesNum = joystick:getAxisCount()
@@ -14,8 +14,8 @@ function love.load()
 		if joystick:isGamepad() then newJoystick.isGamepad = "Yes" else newJoystick.isGamepad = "No" end
 		newJoystick.obj = joystick
 		
-        joysticks[#joysticks+1] = newJoystick
-    end
+		joysticks[#joysticks+1] = newJoystick
+	end
 	
 	if #joysticks > 0 then
 		currentJoystick = 1
