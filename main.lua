@@ -2,7 +2,7 @@ local joysticks = {}
 local currentJoystick = 1
 
 function love.joystickadded(joystick)
-    newJoystick = {}
+    	newJoystick = {}
 	newJoystick.name = joystick:getName()
 	newJoystick.axesNum = joystick:getAxisCount()
 	newJoystick.buttonsNum = joystick:getButtonCount()
