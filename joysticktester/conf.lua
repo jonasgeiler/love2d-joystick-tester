@@ -1,7 +1,7 @@
 function love.conf(t)
 	t.identity = nil
 	t.appendidentity = false
-	t.version = '11.5'
+	t.version = '11.4'
 	t.console = false
 	t.accelerometerjoystick = true
 	t.externalstorage = false
@@ -11,7 +11,7 @@ function love.conf(t)
 	t.audio.mixwithsystem = true
 
 	t.window.title = 'Joystick Tester (Press 0-9 to vibrate all; Use mouse wheel to scroll)'
-	t.window.icon = 'graphics/icon/512.png'
+	t.window.icon = 'graphics/icon.png'
 	t.window.width = 1600
 	t.window.height = 800
 	t.window.borderless = false

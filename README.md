@@ -17,7 +17,7 @@ If you want to see the old version, check out the [`old-version`][old-version] t
 
 ## Requirements
 
-- LÖVE 11.5 (Mysterious Mysteries)
+- LÖVE 11.4 (Mysterious Mysteries)
 
 ## How to try
 

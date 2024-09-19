@@ -36,7 +36,7 @@ jobs:
           bundle-id: com.jonasgeiler.joysticktester
           description: A simple tool to test joysticks and gamepads
           version-string: ${{ env.JOYSTICKTESTER_VERSION }}
-          icon-path: ./joysticktester/graphics/icon/512.png
+          icon-path: ./joysticktester/graphics/icon.png
           love-package: ./release/joysticktester.love
           product-name: joysticktester
           output-folder: ./release/
@@ -74,7 +74,7 @@ jobs:
         uses: love-actions/love-actions-windows@v1.1.3
         with:
           love-package: ./release/joysticktester.love
-          icon-path: ./joysticktester/graphics/icon/multi.ico
+          icon-path: ./assets/icon.ico
           product-name: joysticktester
           project-website: https://github.com/${{ github.repository }}
           output-folder: ./release/
