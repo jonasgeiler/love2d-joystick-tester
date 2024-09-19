@@ -10,13 +10,11 @@ jobs:
     name: Check
     uses: ./.github/workflows/check.yml
 
-  package-and-github-release:
-    name: Package & GitHub Release
-    runs-on: windows-latest
+  create-love-file-and-create-linux-packages:
+    name: Create .love file & Create Linux packages
+    runs-on: ubuntu-latest
     needs: check
 
-    permissions:
-      contents: write
 
     steps:
       - name: Checkout
@@ -35,15 +33,6 @@ jobs:
           build-list: ./joysticktester/
           package-path: ./build/joysticktester.love
 
-      - name: Create Windows packages
-        uses: love-actions/love-actions-windows@v1.1.3
-        with:
-          love-package: ./build/joysticktester.love
-          icon-path: ./joysticktester/graphics/icon/multi.ico
-          product-name: joysticktester
-          project-website: https://github.com/${{ github.repository }}
-          output-folder: ./build/
-
       - name: Create Linux packages
         uses: love-actions/love-actions-linux@v1.2.2
         with:
@@ -54,6 +43,47 @@ jobs:
           icon-path: ./joysticktester/graphics/icon/512.png
           love-package: ./build/joysticktester.love
           product-name: joysticktester
+          output-folder: ./build/
+
+      - name: List files
+        shell: bash
+        run: ls -liashR ./build/
+
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v4.4.0
+        with:
+          name: build-artifacts
+          path: ./build/
+
+  create-windows-packages-and-github-release:
+    name: Create Windows packages & GitHub release
+    runs-on: windows-latest
+    needs: create-love-file-and-create-linux-packages
+
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
+
+      - name: Download build artifacts
+        uses: actions/download-artifact@v4.1.8
+        with:
+          name: build-artifacts
+          path: ./build/
+
+      - name: List files
+        shell: bash
+        run: ls -liashR ./build/
+
+      - name: Create Windows packages
+        uses: love-actions/love-actions-windows@v1.1.3
+        with:
+          love-package: ./build/joysticktester.love
+          icon-path: ./joysticktester/graphics/icon/multi.ico
+          product-name: joysticktester
+          project-website: https://github.com/${{ github.repository }}
           output-folder: ./build/
 
       - name: List files
