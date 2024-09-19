@@ -1,0 +1,67 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*.*.*'
+
+jobs:
+  check:
+    name: Check
+    uses: ./.github/workflows/check.yml
+
+  package-and-github-release:
+    name: Package & GitHub Release
+    runs-on: ubuntu-latest
+    needs: check
+
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
+
+      - name: Set up JOYSTICKTESTER_VERSION
+        run: |
+          JOYSTICKTESTER_VERSION="${GITHUB_REF_NAME#v}"
+          echo "JOYSTICKTESTER_VERSION=$JOYSTICKTESTER_VERSION"
+          echo "JOYSTICKTESTER_VERSION=$JOYSTICKTESTER_VERSION" >> "$GITHUB_ENV"
+
+      - name: Create love file
+        uses: love-actions/love-actions-core@v1.1.0
+        with:
+          build-list: ./joysticktester/
+          package-path: ./build/joysticktester.love
+
+      - name: Create Windows packages
+        uses: love-actions/love-actions-windows@v1.1.3
+        with:
+          love-package: ./build/joysticktester.love
+          icon-path: ./joysticktester/graphics/icon/multi.ico
+          product-name: joysticktester
+          project-website: https://github.com/${{ github.repository }}
+          output-folder: ./build/
+
+      - name: Create Linux packages
+        uses: love-actions/love-actions-linux@v1.2.2
+        with:
+          app-name: Joystick Tester
+          bundle-id: com.jonasgeiler.joysticktester
+          description: A simple tool to test joysticks and gamepads
+          version-string: ${{ env.JOYSTICKTESTER_VERSION }}
+          icon-path: ./joysticktester/graphics/icon/512.png
+          love-package: ./build/joysticktester.love
+          product-name: joysticktester
+          output-folder: ./build/
+
+      - name: List files
+        run: ls -liashR ./build/
+
+      - name: Draft release on GitHub
+        uses: softprops/action-gh-release@c062e08bd532815e2082a85e87e3ef29c3e6d191 # v2.0.8
+        with:
+          draft: true
+          generate_release_notes: true
+          fail_on_unmatched_files: true
+          files: ./build/*
