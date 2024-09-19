@@ -216,7 +216,8 @@ local function updateJoystickTextsLinesVars(id)
 			joystickTextsLinesMost = lines
 			updateTextOffsetYVars()
 		elseif lines < joystickTextsLinesMost then
-			--joystick might have had the most lines and now has fewer, so we have to check all texts and update most lines if needed
+			--joystick might have had the most lines and now has fewer,
+			--so we have to check all texts and update most lines if needed
 			local linesMost = 0
 			for _, ls in pairs(joystickTextsLines) do
 				if ls > linesMost then

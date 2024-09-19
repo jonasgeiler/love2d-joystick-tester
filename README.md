@@ -13,7 +13,7 @@ If you want to see the old version, check out the [`old-version`][old-version] t
 
 ## Screenshot
 
-![Screenshot](https://github.com/user-attachments/assets/4a38974f-80a0-4770-9e3c-140727b7670e)
+![Screenshot](https://github.com/user-attachments/assets/612a4048-1ce7-4dee-abc6-6cf6530ec3bf)
 
 ## Requirements
 
