@@ -15,13 +15,11 @@ jobs:
     runs-on: ubuntu-latest
     needs: check
 
-
     steps:
       - name: Checkout
         uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
 
       - name: Set up JOYSTICKTESTER_VERSION
-        shell: bash
         run: |
           JOYSTICKTESTER_VERSION="${GITHUB_REF_NAME#v}"
           echo "JOYSTICKTESTER_VERSION=$JOYSTICKTESTER_VERSION"
@@ -31,7 +29,7 @@ jobs:
         uses: love-actions/love-actions-core@v1.1.0
         with:
           build-list: ./joysticktester/
-          package-path: ./build/joysticktester.love
+          package-path: ./release/joysticktester.love
 
       - name: Create Linux packages
         uses: love-actions/love-actions-linux@v1.2.2
@@ -41,19 +39,20 @@ jobs:
           description: A simple tool to test joysticks and gamepads
           version-string: ${{ env.JOYSTICKTESTER_VERSION }}
           icon-path: ./joysticktester/graphics/icon/512.png
-          love-package: ./build/joysticktester.love
+          love-package: ./release/joysticktester.love
           product-name: joysticktester
-          output-folder: ./build/
+          output-folder: ./release/
 
-      - name: List files
-        shell: bash
-        run: ls -liashR ./build/
+      - name: Rename Linux packages
+        run: |
+          mv ./release/joysticktester.AppImage ./release/joysticktester_linux_x64.AppImage
+          mv ./release/joysticktester.deb ./release/joysticktester_linux_x64.deb
 
-      - name: Upload build artifacts
+      - name: Upload release artifacts
         uses: actions/upload-artifact@v4.4.0
         with:
-          name: build-artifacts
-          path: ./build/
+          name: release-artifacts
+          path: ./release/
 
   create-windows-packages-and-github-release:
     name: Create Windows packages & GitHub release
@@ -67,28 +66,25 @@ jobs:
       - name: Checkout
         uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
 
-      - name: Download build artifacts
+      - name: Download release artifacts
         uses: actions/download-artifact@v4.1.8
         with:
-          name: build-artifacts
-          path: ./build/
-
-      - name: List files
-        shell: bash
-        run: ls -liashR ./build/
+          name: release-artifacts
+          path: ./release/
 
       - name: Create Windows packages
         uses: love-actions/love-actions-windows@v1.1.3
         with:
-          love-package: ./build/joysticktester.love
+          love-package: ./release/joysticktester.love
           icon-path: ./joysticktester/graphics/icon/multi.ico
           product-name: joysticktester
           project-website: https://github.com/${{ github.repository }}
-          output-folder: ./build/
+          output-folder: ./release/
 
-      - name: List files
-        shell: bash
-        run: ls -liashR ./build/
+      - name: Rename Windows packages
+        run: |
+          mv ./release/joysticktester_x64.zip ./release/joysticktester_windows_x64.zip
+          mv ./release/joysticktester_x86.zip ./release/joysticktester_windows_x86.zip
 
       - name: Draft release on GitHub
         uses: softprops/action-gh-release@c062e08bd532815e2082a85e87e3ef29c3e6d191 # v2.0.8
@@ -96,4 +92,4 @@ jobs:
           draft: true
           generate_release_notes: true
           fail_on_unmatched_files: true
-          files: ./build/*
+          files: ./release/*
