@@ -21,12 +21,21 @@ If you want to see the old version, check out the [`old-version`][old-version] t
 
 ## How to try
 
-Download the repository, and then run `joysticktester`:
+Download the latest release for your OS from the [releases page][releases] and
+install it however you want.
+
+> [!IMPORTANT]
+> Unfortunately, a macOS package is not being provided at the moment.
+> You'll have to download the `.love` file and run it with [LÖVE][love2d].
+
+If you want to try running it from source instead, download the repository and
+then run `love`:
 
 ```bash
-love joysticktester
+love ./joysticktester/
 ```
 
 [love2d]: https://love2d.org/
 [stick-drift]: https://www.makeuseof.com/what-is-joystick-drift/
 [old-version]: https://github.com/jonasgeiler/love2d-joystick-tester/tree/old-version
+[releases]: https://github.com/jonasgeiler/love2d-joystick-tester/releases
