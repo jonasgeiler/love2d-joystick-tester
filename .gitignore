@@ -1,0 +1,24 @@
+# Git ignore file
+# See: https://git-scm.com/docs/gitignore
+
+# OS
+.DS_Store
+
+# IDE
+.idea/
+.vscode/
+!/.vscode/extensions.json
+
+# Temporary Files
+/test.lua
+
+# LuaRocks
+/luarocks/
+/lua/
+/lua_modules/
+/.luarocks/
+*.src.rock
+*.zip
+*.tar.gz
+*.rockspec
+luarocks.lock
