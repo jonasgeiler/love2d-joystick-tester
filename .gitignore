@@ -11,6 +11,7 @@
 
 # Temporary Files
 /test.lua
+/release/
 
 # LuaRocks
 /luarocks/

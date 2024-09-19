@@ -26,10 +26,8 @@ jobs:
           echo "JOYSTICKTESTER_VERSION=$JOYSTICKTESTER_VERSION" >> "$GITHUB_ENV"
 
       - name: Create love file
-        uses: love-actions/love-actions-core@v1.1.0
-        with:
-          build-list: ./joysticktester/
-          package-path: ./release/joysticktester.love
+        working-directory: ./joysticktester/
+        run: 7z a -tzip ../release/joysticktester.love ./
 
       - name: Create Linux packages
         uses: love-actions/love-actions-linux@v1.2.2
