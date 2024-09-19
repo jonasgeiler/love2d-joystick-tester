@@ -12,7 +12,7 @@ jobs:
 
   package-and-github-release:
     name: Package & GitHub Release
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     needs: check
 
     permissions:
@@ -23,6 +23,7 @@ jobs:
         uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
 
       - name: Set up JOYSTICKTESTER_VERSION
+        shell: bash
         run: |
           JOYSTICKTESTER_VERSION="${GITHUB_REF_NAME#v}"
           echo "JOYSTICKTESTER_VERSION=$JOYSTICKTESTER_VERSION"
@@ -56,6 +57,7 @@ jobs:
           output-folder: ./build/
 
       - name: List files
+        shell: bash
         run: ls -liashR ./build/
 
       - name: Draft release on GitHub
