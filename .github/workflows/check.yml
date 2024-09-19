@@ -47,4 +47,4 @@ jobs:
           echo "::add-matcher::visual-studio-problem-matcher.json"
 
           # run luacheck
-          luacheck . --no-cache --formatter visual_studio --include-files "joysticktester/**/*.lua"
+          luacheck . --no-cache --formatter visual_studio --std +love --include-files "joysticktester/**/*.lua"
