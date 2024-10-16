@@ -30,7 +30,7 @@ jobs:
         run: 7z a -tzip ../release/joysticktester.love ./
 
       - name: Create Linux packages
-        uses: love-actions/love-actions-linux@v1.2.2
+        uses: love-actions/love-actions-linux@a88721b73fe4358039f95e523ed6c82124c4c43b # v1.2.3
         with:
           app-name: Joystick Tester
           bundle-id: com.jonasgeiler.joysticktester
