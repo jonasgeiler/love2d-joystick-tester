@@ -65,13 +65,13 @@ jobs:
         uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
 
       - name: Download release artifacts
-        uses: actions/download-artifact@v4.1.8
+        uses: actions/download-artifact@fa0a91b85d4f404e444e00e005971372dc801d16 # v4.1.8
         with:
           name: release-artifacts
           path: ./release/
 
       - name: Create Windows packages
-        uses: love-actions/love-actions-windows@v1.1.3
+        uses: love-actions/love-actions-windows@36cae8246a339241633135d1e74346008d32d20b # v1.1.3
         with:
           love-package: ./release/joysticktester.love
           icon-path: ./assets/icon.ico
