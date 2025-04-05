@@ -71,7 +71,7 @@ jobs:
           path: ./release/
 
       - name: Create Windows packages
-        uses: love-actions/love-actions-windows@9415d83f5753620a85bb3351a61e5dbbf1bc5726 # v1.1.6
+        uses: love-actions/love-actions-windows@c474b843ee4e6c685270adf725551f2e650719ef # v1.2.0
         with:
           love-package: ./release/joysticktester.love
           icon-path: ./assets/icon.ico
