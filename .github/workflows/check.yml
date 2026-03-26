@@ -19,7 +19,11 @@ on:
 jobs:
   lint:
     name: Lint
+
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash --noprofile --norc -euxo pipefail {0}
 
     steps:
       - name: Checkout
@@ -36,8 +40,6 @@ jobs:
           # renovate: datasource=github-releases depName=ammaraskar/msvc-problem-matcher
           MSCV_PROBLEM_MATCHER_VERSION: 0.3.0
         run: |
-          IFS=$' \n\t'; set -euxo pipefail
-
           # install luacheck
           luarocks install luacheck
 

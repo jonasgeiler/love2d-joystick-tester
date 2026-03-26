@@ -12,8 +12,12 @@ jobs:
 
   create-love-file-and-create-linux-packages:
     name: Create .love file & Create Linux packages
-    runs-on: ubuntu-latest
     needs: check
+
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash --noprofile --norc -euxo pipefail {0}
 
     steps:
       - name: Checkout
@@ -54,8 +58,12 @@ jobs:
 
   create-windows-packages-and-github-release:
     name: Create Windows packages & GitHub release
-    runs-on: windows-latest
     needs: create-love-file-and-create-linux-packages
+
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash --noprofile --norc -euxo pipefail {0}
 
     permissions:
       contents: write
